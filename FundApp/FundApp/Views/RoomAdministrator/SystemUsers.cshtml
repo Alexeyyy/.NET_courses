@@ -1,0 +1,100 @@
+﻿@model IEnumerable<FundApp.Models.User>
+
+@{
+    ViewBag.Title = "EditSystemUsers";
+}
+
+<h2 class="title">Пользователи системы</h2>
+
+
+<div class = "filtration-form">
+    <p class ="filter-p">Фильтрация пользователей системы</p>
+    @using(Html.BeginForm("FilterUsers", "RoomAdministrator", FormMethod.Get)) {
+        <span>Выберите пол:</span>
+        @Html.DropDownList("GenderResult", new SelectListItem[] { new SelectListItem { Text = "Мужской", Selected = false, Value = Boolean.TrueString }, new SelectListItem { Text = "Женский", Selected = false, Value = Boolean.FalseString }, new SelectListItem{Text="Не указан", Selected=true, Value=""} }, new {@style = "normal 30px Arial serif" })  
+        <span>Выберите категорию:</span>
+        @Html.DropDownList("UserType", new SelectListItem[] { new SelectListItem { Text = "Партнеры", Selected = false, Value = "Partners" }, new SelectListItem { Text = "Секретари", Selected = false, Value = "Secretaries" }, new SelectListItem { Text = "Пользователи", Selected = false, Value = "RankUsers" }, new SelectListItem { Text = "Экологи", Selected = false, Value = "Ecologists" },new SelectListItem{Text="Не указан", Selected=true, Value=""} }, new {@style = "normal 30px Arial serif" })  
+        <button type="submit" class="btn btn-default">Фильтр</button>
+    }
+</div>
+
+<div class="search-block">
+     @using (Html.BeginForm("SearchUser", "RoomAdministrator", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+     {
+        @Html.TextBox("searchString", null, new { @class = "form-control", placeholder = "Поиск..." })
+        <button type="submit" class="btn btn-default">Искать</button>
+     }
+</div>
+
+<div class="clear">
+</div>
+
+@if(Model.Count() != 0) {
+    <table class="table table-striped table-condensed table-hover data-table table-bordered">
+        <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Дата рождения</th>
+                <th>Email</th>
+                <th>Роль</th>
+                <th>Логин</th>
+                <th>Пароль</th>
+                <th>Удаление</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>
+                        @u.Name @u.FatherName @u.Surname 
+                    </td>
+                    <td>
+                        @u.BirthDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @u.Email
+                    </td>
+                    <td>
+                        @if (u.GetType().ToString().Contains("Administrator"))
+                        {
+                            <span>Администратор</span>
+                        }
+                        @if (u.GetType().ToString().Contains("Ecologist"))
+                        {
+                            <span>Эколог</span>
+                        }
+                        @if (u.GetType().ToString().Contains("RankUser"))
+                        {
+                            <span>Пользователь</span>
+                        }
+                        @if (u.GetType().ToString().Contains("Partner"))
+                        {
+                            <span>Партнер</span>
+                        }
+                        @if (u.GetType().ToString().Contains("Secretary"))
+                        {
+                            <span>Секретарь</span>
+                        }
+                    </td>
+                    <td>
+                        @u.Login
+                    </td>
+                    <td>
+                        @u.Password
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удаление", "DeleteUser", new { id = u.ID})
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else {
+    <p>
+        Извините, вашему запросу не соответствуют никакие данные.   
+    </p>
+}
+
+<br/>
+@Html.ActionLink("Добавить нового пользователя", "AddNewUser", null, new { @class="btn-default btn"})

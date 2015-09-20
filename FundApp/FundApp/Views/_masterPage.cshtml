@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <script src="@Url.Content("~/Scripts/jquery.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/myscripts/gallery.js")"></script>
+
+    <link href="@Url.Content("~/Styles/bootstrap.min.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Styles/style.css")" rel="stylesheet" type="text/css"/>
+
+    <title></title>
+</head>
+<body>
+    <div class="wrapper-top-part">
+        <div class="top-gallery">
+
+            <div class="gallery-left-arrow">
+            </div>
+
+            <div class="gallery-right-arrow">
+            </div>
+
+            <div class="top-gallery-item" style="background: url('/Images/gallery/pictures/picture_1_compr.jpg') no-repeat">
+                <div class="gallery-information">
+                    <h1 class="gal-inf-h1">Обезлесение
+                    </h1>
+                    <p class="gal-inf-p">
+                        Обезлесение — процесс превращения земель, занятых лесом, в земельные угодья без древесного покрова, такие как пастбища, города, пустоши и другие. Наиболее частая причина обезлесения — вырубка леса без достаточной высадки новых деревьев. Кроме того, леса могут быть уничтожены вследствие естественных причин, таких как пожар, ураган или затопление, а также антропогенных факторов, например, кислотных дождей.
+                    </p>
+                    <p class="gal-inf-p">
+                        Процесс уничтожения леса является актуальной проблемой во многих частях земного шара, поскольку влияет на их экологические, климатические и социально-экономические характеристики и снижает качество жизни. Обезлесение приводит к снижению биоразнообразия, запасов древесины, в том числе для промышленного использования, а также к усилению парникового эффекта из-за снижения объёмов фотосинтеза.
+                    </p>
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="top-gallery-item" style="background: url('/Images/gallery/pictures/picture_2_compr.jpg') no-repeat">
+                <div class="gallery-information">
+                    <h1 class="gal-inf-h1">Лесные пожары
+                    </h1>
+                    <p class="gal-inf-p">
+                        Лесно́й пожа́р — это стихийное, неуправляемое распространение огня по лесным площадям. Причины возникновения пожаров в лесу принято делить на естественные и антропогенные. Наиболее распространенными естественными причинами больших лесных пожаров на Земле обычно являются молнии. Размеры пожаров делают возможным их визуальное наблюдение даже из космоса.
+                    </p>
+                    <p>
+                        В молодых лесах, в которых много зелени, вероятность возгорания от молнии существенно ниже, чем в лесах возрастных, где много сухих и больных деревьев. Таким образом в природе ещё задолго до человека существовало своеобразное равновесие. Экологическая роль лесных пожаров заключалась в естественном обновлении лесов.
+                    </p>
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="top-gallery-item" style="background: url('/Images/gallery/pictures/picture_3_compr.jpg') no-repeat">
+                <div class="gallery-information">
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="top-gallery-item" style="background: url('/Images/gallery/pictures/picture_4_compr.jpg') no-repeat">
+                <div class="gallery-information">
+                    <h1 class="gal-inf-h1">Смог
+                    </h1>
+                    <p class="gal-inf-p">
+                        Смог (от англ. Smoky fog, буквально — «Дымовой туман») — чрезмерное загрязнение воздуха вредными веществами, выделенными в результате работы промышленных производств, транспортом и теплопроизводящими установками при определённых погодных условиях.
+                    </p>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="gallery-switchers-wrapper">
+            <div class="gallery-switchers">
+                <div class="gal-sw gal-sw-current">
+                    Обезлесение
+                </div>
+                <div class="gal-sw">
+                    Пожары
+                </div>
+                <div class="gal-sw">
+                    Реклама
+                </div>
+                <div class="gal-sw">
+                    Смог
+                </div>
+            </div>
+        </div>
+
+        <div class="menu">
+            <header>
+                @if (Session["Role"] == null || Session["Role"] == "NotAllowed")
+                {
+@*Была ли ошибка при вводе логина и пароля*@
+                    <table class="entrance-table">
+                        <tr>
+                            @if (Session["ErrorLogIn"] != null && Convert.ToBoolean(Session["ErrorLogin"].ToString()))
+                            {
+                                if (Convert.ToBoolean(Session["ErrorLogIn"].ToString()))
+                                {
+                                <td class="form-message-error">
+                                    Логин или пароль введены неверно!
+                                </td>
+                                }
+                            }
+                            else if (Session["Role"] == "NotAllowed")
+                            {
+                                <td class="form-message-error">
+                                    Отказано в доступе!
+                                </td>
+                            }
+                         
+                     <td class="authorization-form">       
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class= "navbar-form navbar-right" }))
+                    {
+                    <div class="form-group">
+                        <div class="sign-group">
+                            @Html.TextBox("login", null, new { @class = "form-control", placeholder = "login" })
+                            @Html.Password("password", null, new { @class = "form-control", placeholder = "password" })
+                            <button type="submit" id="temporary_id" class="btn btn-default">Войти</button>
+                            @Html.ActionLink("Регистрация", "SignUpChoice", "Registration", null, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+                    }
+                         </td>
+                            </tr>
+                    </table>
+                     
+                }
+                else
+                {
+                    <table class="exit-table">
+                        <tr>
+                            <td class="form-message-accepted">
+                                @Session["Greeting"]
+                            </td>
+                            <td class="exit-btn">
+                                @Html.ActionLink("Выход", "Logout", "Account", null, new { @class = "btn btn-default btn-exit" })
+                            </td>
+                        </tr>
+                    </table>
+                }
+            </header>
+
+            <div class="clear">
+            </div>
+
+            <nav>
+                <ul class="nav-ul">
+                    <li class="nav-li-logo">
+                        <img src="~/Images/logos/logo_mini.png" />
+                    </li>
+                    <li class="nav-li">
+                        @Html.ActionLink("Главная", "Index", "Home", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-li">
+                        @Html.ActionLink("Партнеры", "PartnersPage", "Partners", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-li">
+                        @Html.ActionLink("Экологи", "EcologistsPage", "Ecologists", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-li">
+                        @Html.ActionLink("Проблемы", "ProblemsPage", "Problems", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-li">
+                        @Html.ActionLink("Просвещение", "SectionsPage", "Sections", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-li">
+                        @Html.ActionLink("Достижения", "AchievementsPage", "Achievements", null, new { @class = "nav-link" })
+                    </li>
+                    @*ЕСЛИ ПОЛЬЗОВАТЕЛЬ ЗАЛОГИНЕН ---- ОТКРЫВАЕМ ЕМУ ДОП. ФУНКЦИИ*@
+                    @if (Session["Role"] != null)
+                    {
+                        if (Session["Role"] == "Administrator")
+                        {
+                        <li class="nav-li">
+                            @Html.ActionLink("Кабинет", "AdministratorRoom", "RoomAdministrator", null, new { @class = "nav-link" })
+                        </li>
+                        }
+                        if (Session["Role"] == "Secretary")
+                        {
+                        <li class="nav-li">
+                            @Html.ActionLink("Кабинет", "SecretaryRoom", "RoomSecretary", null, new { @class = "nav-link" })
+                        </li>
+                        }
+                        if (Session["Role"] == "Ecologist")
+                        {
+                        <li class="nav-li">
+                            @Html.ActionLink("Кабинет", "EcologistRoom", "RoomEcologist", null, new { @class = "nav-link" })
+                        </li>
+                        }
+                        if (Session["Role"] == "User")
+                        {
+                        <li class="nav-li">
+                            @Html.ActionLink("Кабинет", "UserRoom", "RoomUser", null, new { @class = "nav-link" })
+                        </li>
+                        }
+                        if (Session["Role"] == "Partner")
+                        {
+                        <li class="nav-li">
+                            @Html.ActionLink("Кабинет", "PartnerRoom", "RoomPartner", null, new { @class = "nav-link" })
+                        </li>
+                        }
+                    }
+                </ul>
+                <div class="bottom-stripe">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="clear">
+    </div>
+
+    <div class="renderer-block">
+        @*Html.ValidationSummary(false)*@
+        @RenderBody()
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="footer-wrapper">
+        <footer>
+            <div class="footer-left-part">
+                <img src="~/Images/footer/logo_footer.png">
+                <p>
+                    ©copyright
+                </p>
+            </div>
+            <div class="footer-right-part">
+                <p>
+                    Защитим! Поможем природе вместе!
+                </p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

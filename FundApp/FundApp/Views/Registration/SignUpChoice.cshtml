@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "SignUpChoice";
+}
+
+<h2>Регистрация</h2>
+
+<table class="choice-group">
+    <tr>
+        <td class="choice-item">
+            <h2>
+                Для пользователя
+            </h2>
+            <p>
+                Хотите узнать побольше об экологии? Записаться на участие в экологических секциях? Вам сюда.
+            </p>
+            @Html.ActionLink("Зарегистрироваться", "SignUpFormRankUser", "Registration", new { @class = "btn btn-default"})
+        </td>
+                
+        <td class="choice-item">
+            <h2>Для эколога</h2>
+            <p>
+                Если вы эколог-специалист и хотите сотрудничать с нашим фондом - Вам сюда.
+            </p>
+            
+            @Html.ActionLink("Зарегистрироваться", "SignUpFormEcologist", "Registration", new { @class = "btn btn-default"})
+        </td>
+                
+        <td class="choice-item">
+            <h2>
+                Для организации партнера
+            </h2>
+            <p>
+                Вы организация, заинтересованная в сотрудничестве? Представитель организации может зарегистрироваться здесь. (P.S. после регистрации придеться немного подождать. Наш секретарь проверит вашу заявку)
+            </p>
+            @Html.ActionLink("Зарегистрироваться", "SignUpFormPartner", "Registration", new { @class = "btn btn-default"})
+        </td>
+    </tr>
+</table>

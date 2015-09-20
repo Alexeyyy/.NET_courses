@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "EcologistRoom";
+}
+
+<h2 class="title">Эколог</h2>
+
+<table class="choice-group">
+    <tr>
+        <td class="choice-item">
+            <h2>
+                Экологические советы
+            </h2>
+            <p>
+                В данном блоке экологу-специлисту предлагается возможность регистрации своего участия в экологических советах.
+            </p>
+            @Html.ActionLink("Перейти в раздел...", "Councils", "RoomEcologist", new { @class = "btn btn-default"})
+        </td>
+
+        <td class="choice-item">
+            <h2>
+                Жалобы на экологические нарушения 
+            </h2>
+            <p>
+                В данном блоке администратору системы предлагается возможность рассмотрения жалоб пользователей на экологические нарушения, создания экологических проблем на основе проведенного мониторинга.
+            </p>
+            @Html.ActionLink("Перейти в раздел...", "Complaints", "RoomEcologist", new { @class = "btn btn-default"})
+        </td>
+    </tr>
+</table>
